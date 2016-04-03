@@ -32,7 +32,7 @@ module.exports = function (grunt) {
      install: {
        //just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
      }
-    }
+    },
 
     // Project settings
     yeoman: appConfig,
