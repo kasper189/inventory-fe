@@ -39,5 +39,11 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-logger": "0.0.3",
+    "gzippo": "^0.2.0",
+    "logger": "0.0.1"
   }
 }
