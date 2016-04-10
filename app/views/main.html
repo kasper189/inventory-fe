@@ -1,10 +1,4 @@
 <div class="panel">
-  <div class="input-group">
-    <input class="form-control" />
-    <span class="input-group-btn">
-      <button class="btn btn-default">Add</button>
-    </span>
-  </div>
 
   <table class="table table-striped">
     <thead>
@@ -20,4 +14,18 @@
       </tr>
     </tbody>
   </table>
+
+
+  <div class="row">
+    <div class="col-md-8">
+      <input type="text" id="id_item" class="form-control" placeholder="Product name" ng-model="item" >
+    </div>
+    <div class="col-md-2">
+      <input type="text" id="id_count" class="form-control" placeholder="Count" ng-model="count" >
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-secondary" type="button" onclick="ClearFields();" ng-click="addItem(item, count)">ADD</button>
+    </div>
+  </div>
+
 </div>
