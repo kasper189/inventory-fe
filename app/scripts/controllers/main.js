@@ -12,6 +12,7 @@ angular.module('inventoryFeApp')
 
     $http.get('http://inventory-backend.herokuapp.com/inventory').
       success(function(data) {
+      console.log("Found: " + data)
         $scope.inventory_list = data;
     });
 
