@@ -1,5 +1,5 @@
 function ClearFields()
 {
   document.getElementById("id_item").value = "";
-  document.getElementById("id_count").value = "";
+  document.getElementById("id_count").blur();;
 }

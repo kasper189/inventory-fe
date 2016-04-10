@@ -16,17 +16,23 @@ angular.module('inventoryFeApp')
         $scope.inventory_list = data;
     });
 
-    //$scope.addItem = function(item, count) {
-    //  $scope.inventory_list.push( { item: item.toUpperCase(), count: count } );
-    //}
-
     $scope.addItem = function(item, count)
     {
+      console.log("Item name: " + item)
+      console.log("Item count: " + count)
+
+      if (count === undefined || count === null)
+      {
+        count = 1
+      }
       var newProduct = { item: item.toUpperCase(), count: count }
+
       $http.post('http://inventory-backend.herokuapp.com/inventory', newProduct)
         .success(function (newProduct)
         {
           $scope.inventory_list.push(newProduct);
+          $scope.item = null
+          $scope.count = null
         });
     }
 
