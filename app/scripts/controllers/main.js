@@ -36,4 +36,28 @@ angular.module('inventoryFeApp')
         });
     }
 
+    $scope.increaseItem = function(index)
+    {
+      console.log('Increasing element with index: ' + index)
+      $scope.inventory_list[index].count +=1
+    }
+
+    $scope.decreaseItem = function(index)
+    {
+      console.log('Decreasing element with index: ' + index)
+      $scope.inventory_list[index].count -=1
+
+      if($scope.inventory_list[index].count == 0)
+      {
+        console.log('Element with index: ' + index + ' reached zero: deleting')
+        $scope.deleteItem(index);
+      }
+    }
+
+    $scope.deleteItem = function(index)
+    {
+      console.log('Deleting element with index: ' + index)
+      $scope.inventory_list.splice(index, 1);
+    }
+
 }]);

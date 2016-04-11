@@ -3,14 +3,29 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th>Item</th>
-      <th>Count</th>
+      <th class="col-md-5">Item</th>
+      <th class="col-md-3">Count</th>
+      <th class="col-md-2">Operations</th>
     </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="element in inventory_list">
+      <tr ng-repeat="element in inventory_list track by $index">
         <td>{{element.item}}</td>
         <td>{{element.count}}</td>
+        <td>
+          <button type="button" class="btn btn-default btn-sm btn-success" data-toggle="tooltip" title="Add one"
+                  ng-click="increaseItem($index);">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-sm btn-warning" data-toggle="tooltip" title="Remove one"
+                  ng-click="decreaseItem($index);">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-sm btn-danger" data-toggle="tooltip" title="Delete item"
+                  ng-click="deleteItem($index);">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
