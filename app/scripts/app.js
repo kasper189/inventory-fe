@@ -30,7 +30,10 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/error', {
+        templateUrl: '404.html',
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/error'
       });
   });
