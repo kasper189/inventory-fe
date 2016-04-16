@@ -25,11 +25,16 @@ angular.module('inventoryFeApp')
       {
         count = 1
       }
+
+      console.log('Item name: ' + item)
+      console.log('Item count: ' + count)
+
       var newProduct = { item: item.toUpperCase(), count: count }
 
       $http.post('http://inventory-backend.herokuapp.com/inventory', newProduct)
-        .success(function (newProduct)
+        .success(function(newProduct)
         {
+          console.log('Added item has id: ' + newProduct.id)
           $scope.inventory_list.push(newProduct);
           $scope.item = null
           $scope.count = null
@@ -39,19 +44,39 @@ angular.module('inventoryFeApp')
     $scope.increaseItem = function(index)
     {
       console.log('Increasing element with index: ' + index)
-      $scope.inventory_list[index].count +=1
+
+      var item_count = parseInt($scope.inventory_list[index].count) + 1
+      var item_id = $scope.inventory_list[index].id
+
+      console.log('Item count: ' + item_count)
+      console.log('Item id: ' + item_id)
+
+      $http.put('http://inventory-backend.herokuapp.com/item/' + item_id, { 'count': item_count })
+        .success(function(updated_product)
+        {
+          console.log('Received item after update: ' + updated_product)
+          $scope.inventory_list[index].count = updated_product.count
+        });
+
     }
 
     $scope.decreaseItem = function(index)
     {
       console.log('Decreasing element with index: ' + index)
-      $scope.inventory_list[index].count -=1
+      
+      var item_count = parseInt($scope.inventory_list[index].count) - 1
+      var item_id = $scope.inventory_list[index].id
 
-      if($scope.inventory_list[index].count == 0)
-      {
-        console.log('Element with index: ' + index + ' reached zero: deleting')
-        $scope.deleteItem(index);
-      }
+      console.log('Item count: ' + item_count)
+      console.log('Item id: ' + item_id)
+
+      $http.put('http://inventory-backend.herokuapp.com/item/' + item_id, { 'count': item_count })
+        .success(function(updated_product)
+        {
+          console.log('Received item after update: ' + updated_product)
+          $scope.inventory_list[index].count = updated_product.count
+        });
+
     }
 
     $scope.deleteItem = function(index)
