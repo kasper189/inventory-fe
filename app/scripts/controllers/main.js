@@ -23,7 +23,7 @@ angular.module('inventoryFeApp')
 
       if (count === undefined || count === null)
       {
-        count = 1
+        count = 0
       }
 
       console.log('Item name: ' + item)
