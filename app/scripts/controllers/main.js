@@ -63,7 +63,7 @@ angular.module('inventoryFeApp')
     $scope.decreaseItem = function(index)
     {
       console.log('Decreasing element with index: ' + index)
-      
+
       var item_count = parseInt($scope.inventory_list[index].count) - 1
       var item_id = $scope.inventory_list[index].id
 
@@ -82,7 +82,16 @@ angular.module('inventoryFeApp')
     $scope.deleteItem = function(index)
     {
       console.log('Deleting element with index: ' + index)
-      $scope.inventory_list.splice(index, 1);
+      var item_id = $scope.inventory_list[index].id
+
+      $http.delete('http://inventory-backend.herokuapp.com/item/' + item_id)
+        .success(function(deleted_message)
+        {
+          if(deleted_message.status !== undefined && deleted_message.status === "deleted") {
+            console.log('Item successfully deleted: ' + item_id)
+            $scope.inventory_list.splice(index, 1);
+          }
+        });
     }
 
 }]);
