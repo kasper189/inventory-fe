@@ -10,7 +10,7 @@ angular.module('inventoryFeApp')
 	.controller('MainCtrl', ['$scope', '$http', function ($scope, $http) {
 
 
-    $http.get('http://inventory-backend.herokuapp.com/inventory').
+    $http.get('https://inventory-be.herokuapp.com/inventory').
       success(function(data) {
       console.log("Found: " + data)
         $scope.inventory_list = data;
@@ -31,7 +31,7 @@ angular.module('inventoryFeApp')
 
       var newProduct = { item: item.toUpperCase(), count: count }
 
-      $http.post('http://inventory-backend.herokuapp.com/inventory', newProduct)
+      $http.post('https://inventory-be.herokuapp.com/inventory', newProduct)
         .success(function(newProduct)
         {
           console.log('Added item has id: ' + newProduct.id)
@@ -51,7 +51,7 @@ angular.module('inventoryFeApp')
       console.log('Item count: ' + item_count)
       console.log('Item id: ' + item_id)
 
-      $http.put('http://inventory-backend.herokuapp.com/item/' + item_id, { 'count': item_count })
+      $http.put('https://inventory-be.herokuapp.com/item/' + item_id, { 'count': item_count })
         .success(function(updated_product)
         {
           console.log('Received item after update: ' + updated_product)
@@ -70,7 +70,7 @@ angular.module('inventoryFeApp')
       console.log('Item count: ' + item_count)
       console.log('Item id: ' + item_id)
 
-      $http.put('http://inventory-backend.herokuapp.com/item/' + item_id, { 'count': item_count })
+      $http.put('https://inventory-be.herokuapp.com/item/' + item_id, { 'count': item_count })
         .success(function(updated_product)
         {
           console.log('Received item after update: ' + updated_product)
@@ -84,7 +84,7 @@ angular.module('inventoryFeApp')
       console.log('Deleting element with index: ' + index)
       var item_id = $scope.inventory_list[index].id
 
-      $http.delete('http://inventory-backend.herokuapp.com/item/' + item_id)
+      $http.delete('https://inventory-be.herokuapp.com/item/' + item_id)
         .success(function(deleted_message)
         {
           if(deleted_message.status !== undefined && deleted_message.status === "deleted") {
