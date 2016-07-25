@@ -16,7 +16,7 @@ angular.module('inventoryFeApp')
         $scope.inventory_list = data;
     });
 
-    $scope.addItem = function(item, count)
+    $scope.addItem = function(name, count)
     {
       console.log("Item name: " + name)
       console.log("Item count: " + count)
