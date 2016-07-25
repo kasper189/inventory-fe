@@ -18,7 +18,7 @@ angular.module('inventoryFeApp')
 
     $scope.addItem = function(item, count)
     {
-      console.log("Item name: " + item)
+      console.log("Item name: " + name)
       console.log("Item count: " + count)
 
       if (count === undefined || count === null)
@@ -26,10 +26,10 @@ angular.module('inventoryFeApp')
         count = 0
       }
 
-      console.log('Item name: ' + item)
+      console.log('Item name: ' + name)
       console.log('Item count: ' + count)
 
-      var newProduct = { item: item.toUpperCase(), count: count }
+      var newProduct = { name: name.toUpperCase(), count: count }
 
       $http.post('http://inventory-be.herokuapp.com/inventory', newProduct)
         .success(function(newProduct)
