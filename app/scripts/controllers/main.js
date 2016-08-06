@@ -41,57 +41,86 @@ angular.module('inventoryFeApp')
         });
     }
 
-    $scope.increaseItem = function(index)
+    $scope.increaseItem = function(item_id)
     {
-      console.log('Increasing element with index: ' + index)
+      console.log('Increasing element with id: ' + item_id)
 
-      var item_count = parseInt($scope.inventory_list[index].count) + 1
-      var item_id = $scope.inventory_list[index].id
+			var index = $scope.findItem(item_id)
 
-      console.log('Item count: ' + item_count)
-      console.log('Item id: ' + item_id)
+			if(index !== undefined)
+			{
+	      var item_count = parseInt($scope.inventory_list[index].count) + 1
+	      var item_id = $scope.inventory_list[index].id
 
-      $http.put('http://inventory-be.herokuapp.com/item/' + item_id, { 'count': item_count })
-        .success(function(updated_product)
-        {
-          console.log('Received item after update: ' + updated_product)
-          $scope.inventory_list[index].count = updated_product.count
-        });
+	      console.log('Item count: ' + item_count)
+	      console.log('Item id: ' + item_id)
 
+	      $http.put('http://inventory-be.herokuapp.com/item/' + item_id, { 'count': item_count })
+	        .success(function(updated_product)
+	        {
+	          console.log('Received item after update: ' + updated_product)
+	          $scope.inventory_list[index].count = updated_product.count
+	        });
+			}
     }
 
-    $scope.decreaseItem = function(index)
+    $scope.decreaseItem = function(item_id)
     {
-      console.log('Decreasing element with index: ' + index)
+      console.log('Decreasing element with index: ' + item_id)
 
-      var item_count = parseInt($scope.inventory_list[index].count) - 1
-      var item_id = $scope.inventory_list[index].id
+			var index = $scope.findItem(item_id)
 
-      console.log('Item count: ' + item_count)
-      console.log('Item id: ' + item_id)
+			if(index !== undefined)
+			{
+				var item_count = parseInt($scope.inventory_list[index].count) - 1
+				var item_id = $scope.inventory_list[index].id
 
-      $http.put('http://inventory-be.herokuapp.com/item/' + item_id, { 'count': item_count })
-        .success(function(updated_product)
-        {
-          console.log('Received item after update: ' + updated_product)
-          $scope.inventory_list[index].count = updated_product.count
-        });
+				console.log('Item count: ' + item_count)
+				console.log('Item id: ' + item_id)
 
+				$http.put('http://inventory-be.herokuapp.com/item/' + item_id, { 'count': item_count })
+					.success(function(updated_product)
+					{
+						console.log('Received item after update: ' + updated_product)
+						$scope.inventory_list[index].count = updated_product.count
+					});
+			}
     }
 
-    $scope.deleteItem = function(index)
+    $scope.deleteItem = function(item_id)
     {
-      console.log('Deleting element with index: ' + index)
-      var item_id = $scope.inventory_list[index].id
+      console.log('Deleting element with index: ' + item_id)
 
-      $http.delete('http://inventory-be.herokuapp.com/item/' + item_id)
-        .success(function(deleted_message)
-        {
-          if(deleted_message.status !== undefined && deleted_message.status === "deleted") {
-            console.log('Item successfully deleted: ' + item_id)
-            $scope.inventory_list.splice(index, 1);
-          }
-        });
+			var index = $scope.findItem(item_id)
+
+			if(index !== undefined)
+			{
+				var item_id = $scope.inventory_list[index].id
+
+				$http.delete('http://inventory-be.herokuapp.com/item/' + item_id)
+					.success(function(deleted_message)
+					{
+						if(deleted_message.status !== undefined && deleted_message.status === "deleted") {
+							console.log('Item successfully deleted: ' + item_id)
+							$scope.inventory_list.splice(index, 1);
+						}
+					});
+			}
+    }
+
+		$scope.findItem = function(id)
+    {
+      console.log('Finding element with id: ' + id)
+
+			for (var i = 0; i < $scope.inventory_list.length; i++)
+			{
+				if($scope.inventory_list[i].id === id)
+				{
+					console.log('Element found with position: ' + i)
+					return i
+				}
+			}
+			console.log('Element NOT found')
     }
 
 }]);
