@@ -1,14 +1,35 @@
 <div class="panel">
 
-  <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
 
-        <input type="text" class="form-control" placeholder="Search Inventory Item" ng-model="searchItem">
 
+  <div class="container-fluid">
+
+    <div class="col-md-14">
+
+      <div class="col-md-6">
+          <input type="text" id="id_item" class="form-control" placeholder="Product name" ng-model="name" >
+      </div>
+      <div class="col-md-4">
+        <input type="text" id="id_count" class="form-control" placeholder="Count" ng-model="count" >
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary btn-block" type="button" onclick="ClearFields();" ng-click="addItem(name, count)">ADD</button>
+      </div>
+    </div>
+
+    <div class="col-md-12" style="height: 5px;" >
+    </div>
+
+    <div class="col-md-12">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+          <input type="text" class="form-control" placeholder="Search Inventory Item" ng-model="searchItem">
+        </div>
       </div>
   </div>
 
+  <div class="col-md-12" style="height: 10px;" >
+  </div>
 
   <table class="table table-striped">
     <thead>
@@ -39,18 +60,5 @@
       </tr>
     </tbody>
   </table>
-
-
-  <div class="row">
-    <div class="col-md-8">
-      <input type="text" id="id_item" class="form-control" placeholder="Product name" ng-model="name" >
-    </div>
-    <div class="col-md-2">
-      <input type="text" id="id_count" class="form-control" placeholder="Count" ng-model="count" >
-    </div>
-    <div class="col-md-1">
-      <button class="btn btn-secondary" type="button" onclick="ClearFields();" ng-click="addItem(name, count)">ADD</button>
-    </div>
-  </div>
 
 </div>
